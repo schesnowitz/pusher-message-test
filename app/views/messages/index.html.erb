@@ -1,14 +1,11 @@
 
 
 <h1>Messages</h1>
-
+<p id='the-message'></p><br>
+<%= render 'form', message: @message %>
 <table>
   <thead>
-    <tr>
-      <th>Text</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
+
   </thead>
 
   <tbody>
@@ -16,14 +13,14 @@
       <tr>
         <td><%= message.text if message.present? %></td> 
         <td><% message.user_id %></td>
-        <p id='the-message'></p>  
+          
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-<%= render 'form', message: @message %>
+
 <% link_to 'New Message', new_message_path %>
 
 
@@ -43,6 +40,7 @@
     // alert(data.message);   
     // document.getElementById("the-message").innerHTML = data.text;
     $("#the-message").append('<p>' + data.text + '</p>'); 
-    // $("p").append(data.text); 
+    $('#message_text').val(''); 
+    
   });
 </script>
