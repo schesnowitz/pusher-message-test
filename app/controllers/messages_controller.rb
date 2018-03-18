@@ -6,10 +6,6 @@ class MessagesController < ApplicationController
   def index
     @messages = Message.all 
     @message = Message.new
-    Pusher.trigger('my-channel', 'my-event', {
-      message: '@messages'
-
-    })
   end
 
   # GET /messages/1
@@ -33,6 +29,10 @@ class MessagesController < ApplicationController
     # @message.save 
     respond_to do |format|
       if @message.save
+        Pusher.trigger('my-channel', 'my-event', {
+          message: @message.text 
+    
+        })
         format.html { redirect_to @message, notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @message }
       else

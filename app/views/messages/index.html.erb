@@ -16,9 +16,7 @@
       <tr>
         <td><%= message.text if message.present? %></td> 
         <td><% message.user_id %></td>
-        <td><%= link_to 'Show', message %></td>
-        <td><%= link_to 'Edit', edit_message_path(message) %></td>
-        <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <p id='the-message'></p>  
       </tr>
     <% end %>
   </tbody>
@@ -27,19 +25,22 @@
 <br>
 <%= render 'form', message: @message %>
 <% link_to 'New Message', new_message_path %>
-  <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
-  <script>
 
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
 
-    var pusher = new Pusher('3bd6868fd1034baf277c', {
-      cluster: 'us2',
-      encrypted: true
-    });
+<script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+<script>
 
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function(data) {
-      alert(data.message);
-    });
-  </script>
+  // Enable pusher logging - don't include this in production
+  Pusher.logToConsole = true;
+
+  var pusher = new Pusher('3bd6868fd1034baf277c', {
+    cluster: 'us2',
+    encrypted: true
+  });
+
+  var channel = pusher.subscribe('my-channel');
+  channel.bind('my-event', function(data) {
+    // alert(data.message);   
+    document.getElementById("the-message").innerHTML = data.message;
+  });
+</script>

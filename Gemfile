@@ -10,7 +10,7 @@ gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
-gem 'turbolinks', '~> 5'
+# gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'redis', '~> 4.0'
 gem 'nokogiri', '~> 1.8', '>= 1.8.2'
@@ -18,6 +18,7 @@ gem 'mini_magick', '~> 4.8'
 gem 'nanoboxifier', '~> 0.1.1'
 gem 'simple_form', '~> 3.5', '>= 3.5.1'
 gem 'pusher'
+gem 'jquery-rails'
 # rails generate simple_form:install --bootstrap
 
 # Use Capistrano for deployment
