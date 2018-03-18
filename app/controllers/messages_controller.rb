@@ -25,13 +25,13 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
+    @messages = Message.all 
     @message = Message.new(message_params)
-    # @message.save 
     respond_to do |format|
       if @message.save
         Pusher.trigger('my-channel', 'my-event', {
-          message: @message.text 
-    
+          # text: @messages.each { |message| message.text }
+          text: @message.text 
         })
         format.html { redirect_to @message, notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @message }

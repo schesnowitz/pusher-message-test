@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <h1>Messages</h1>
 
@@ -41,6 +41,8 @@
   var channel = pusher.subscribe('my-channel');
   channel.bind('my-event', function(data) {
     // alert(data.message);   
-    document.getElementById("the-message").innerHTML = data.message;
+    // document.getElementById("the-message").innerHTML = data.text;
+    $("#the-message").append('<p>' + data.text + '</p>'); 
+    // $("p").append(data.text); 
   });
 </script>
