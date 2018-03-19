@@ -1,7 +1,9 @@
 
 
 <h1>Messages</h1>
+<h1 id='the-user'></h1>  
 <p id='the-message'></p><br>
+
 <%= render 'form', message: @message %>
 <table>
   <thead>
@@ -12,7 +14,7 @@
     <% @messages.each do |message| %>
       <tr>
         <td><%= message.text if message.present? %></td> 
-        <td><% message.user_id %></td>
+        <td><%= message.user.user_name %></td> 
           
       </tr>
     <% end %>
@@ -21,26 +23,9 @@
 
 <br>
 
-<% link_to 'New Message', new_message_path %>
 
 
-<script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+
 <script>
 
-  // Enable pusher logging - don't include this in production
-  Pusher.logToConsole = true;
-
-  var pusher = new Pusher('3bd6868fd1034baf277c', {
-    cluster: 'us2',
-    encrypted: true
-  });
-
-  var channel = pusher.subscribe('my-channel');
-  channel.bind('my-event', function(data) {
-    // alert(data.message);   
-    // document.getElementById("the-message").innerHTML = data.text;
-    $("#the-message").append('<p>' + data.text + '</p>'); 
-    $('#message_text').val(''); 
-    
-  });
 </script>

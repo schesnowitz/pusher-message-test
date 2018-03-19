@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /messages
   # GET /messages.json
@@ -15,7 +16,8 @@ class MessagesController < ApplicationController
 
   # GET /messages/new
   def new
-    @message = Message.new
+    current_user.messages.build
+    # @message = Message.new
   end
 
   # GET /messages/1/edit
@@ -26,13 +28,16 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @messages = Message.all 
-    @message = Message.new(message_params)
+    @message = current_user.messages.build(message_params)
     respond_to do |format|
       if @message.save
         Pusher.trigger('my-channel', 'my-event', {
           # text: @messages.each { |message| message.text }
-          text: @message.text 
+          text: @message.text, 
+          user_name: @message.user.user_name
         })
+
+        puts 
         format.html { redirect_to @message, notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @message }
       else
@@ -71,6 +76,8 @@ class MessagesController < ApplicationController
     def set_message
       @message = Message.find(params[:id])
     end
+
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params

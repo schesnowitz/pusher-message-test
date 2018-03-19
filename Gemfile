@@ -19,6 +19,7 @@ gem 'nanoboxifier', '~> 0.1.1'
 gem 'simple_form', '~> 3.5', '>= 3.5.1'
 gem 'pusher'
 gem 'jquery-rails'
+gem 'devise'
 # rails generate simple_form:install --bootstrap
 
 # Use Capistrano for deployment
